@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-const position = [14.6792882, -90.4124816];
+const position = [14.683456695656572, -91.0147648095703];
 
 export default function Map() {
   return (
@@ -10,7 +10,7 @@ export default function Map() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker position={position}>
-        <Popup>Huellitas Guatemala (ejemplo)</Popup>
+        <Popup>Huellitas Guatemala (Ubicación de parque central patzun)</Popup>
       </Marker>
     </MapContainer>
   );
