@@ -1,9 +1,5 @@
 import API_BASE_URL from '../config';
 
-/**
- * Enviar mensaje de contacto
- * @param {Object} data - Datos del formulario
- */
 export async function sendContactMessage(data) {
   try {
     const response = await fetch(`${API_BASE_URL}/api/contact/messages/`, {

@@ -34,23 +34,16 @@ function adaptNewsData(backendNews) {
   };
 }
 
-/**
- * Obtener todas las noticias
- */
 export async function fetchNews() {
   try {
-    const response = await fetch(`${API_BASE_URL}/content/news/`);
+    const response = await fetch(`${API_BASE_URL}/api/content/news/`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
     const result = await response.json();
-    
-    // El backend puede devolver paginación o array directo
     const backendData = result.results || result;
-    
-    // Adaptar los datos
     const adaptedData = backendData.map(adaptNewsData);
     
     return { data: adaptedData };
@@ -60,21 +53,15 @@ export async function fetchNews() {
   }
 }
 
-/**
- * Obtener noticia por ID o slug
- */
 export async function fetchNewsById(idOrSlug) {
   try {
-    // Intentar por ID primero, luego por slug
-    let response = await fetch(`${API_BASE_URL}/content/news/${idOrSlug}/`);
+    const response = await fetch(`${API_BASE_URL}/api/content/news/${idOrSlug}/`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
     const backendData = await response.json();
-    
-    // Adaptar al formato del frontend
     const adaptedData = adaptNewsData(backendData);
     
     return { data: adaptedData };
@@ -84,20 +71,15 @@ export async function fetchNewsById(idOrSlug) {
   }
 }
 
-/**
- * Obtener noticias destacadas
- */
 export async function fetchFeaturedNews() {
   try {
-    const response = await fetch(`${API_BASE_URL}/content/news/featured/`);
+    const response = await fetch(`${API_BASE_URL}/api/content/news/featured/`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
     const result = await response.json();
-    
-    // Adaptar los datos
     const adaptedData = result.map(adaptNewsData);
     
     return { data: adaptedData };

@@ -24,13 +24,9 @@ function adaptPetData(backendPet) {
   };
 }
 
-/**
- * Obtener todas las mascotas con filtros
- */
 export async function fetchDogs(params = {}) {
   const { q = "", disponible, energia, tamanio, page = 1, pageSize = 12 } = params;
   
-  // Construir query string
   const queryParams = new URLSearchParams();
   
   if (q) queryParams.append('search', q);
@@ -42,18 +38,15 @@ export async function fetchDogs(params = {}) {
   queryParams.append('page', page);
   
   try {
-    const response = await fetch(`${API_BASE_URL}/pets/?${queryParams.toString()}`);
+    const response = await fetch(`${API_BASE_URL}/api/pets/?${queryParams.toString()}`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
     const result = await response.json();
-    
-    // El backend devuelve datos paginados con 'results'
     const backendData = result.results || result;
     
-    // Adaptar los datos al formato del frontend
     const adaptedData = backendData.map(adaptPetData);
     
     return {
@@ -69,20 +62,15 @@ export async function fetchDogs(params = {}) {
   }
 }
 
-/**
- * Obtener detalle de una mascota por ID
- */
 export async function fetchDogById(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/pets/${id}/`);
+    const response = await fetch(`${API_BASE_URL}/api/pets/${id}/`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
     const backendData = await response.json();
-    
-    // Adaptar al formato del frontend
     const adaptedData = adaptPetData(backendData);
     
     return { data: adaptedData };
@@ -92,23 +80,16 @@ export async function fetchDogById(id) {
   }
 }
 
-/**
- * Obtener solo mascotas disponibles
- */
 export async function fetchAvailableDogs() {
   try {
-    const response = await fetch(`${API_BASE_URL}/pets/available/`);
+    const response = await fetch(`${API_BASE_URL}/api/pets/available/`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
     const result = await response.json();
-    
-    // El endpoint 'available' NO usa paginación, devuelve array directo
     const backendData = Array.isArray(result) ? result : (result.results || []);
-    
-    // Adaptar los datos
     const adaptedData = backendData.map(adaptPetData);
     
     return { data: adaptedData };

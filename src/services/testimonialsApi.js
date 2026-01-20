@@ -37,18 +37,14 @@ function adaptTestimonialData(backendStory) {
  */
 export async function fetchTestimonials() {
   try {
-    const response = await fetch(`${API_BASE_URL}/content/success-stories/`);
+    const response = await fetch(`${API_BASE_URL}/api/content/success-stories/`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
     const result = await response.json();
-    
-    // El backend puede devolver paginación o array directo
     const backendData = result.results || result;
-    
-    // Adaptar los datos
     const adaptedData = backendData.map(adaptTestimonialData);
     
     return { data: adaptedData };
@@ -58,20 +54,15 @@ export async function fetchTestimonials() {
   }
 }
 
-/**
- * Obtener testimonios destacados
- */
 export async function fetchFeaturedTestimonials() {
   try {
-    const response = await fetch(`${API_BASE_URL}/content/success-stories/featured/`);
+    const response = await fetch(`${API_BASE_URL}/api/content/success-stories/featured/`);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
     const result = await response.json();
-    
-    // Adaptar los datos
     const adaptedData = result.map(adaptTestimonialData);
     
     return { data: adaptedData };
