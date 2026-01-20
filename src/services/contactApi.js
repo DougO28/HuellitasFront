@@ -6,7 +6,7 @@ import API_BASE_URL from '../config';
  */
 export async function sendContactMessage(data) {
   try {
-    const response = await fetch(`${API_URL}/api/contact/messages/`, {
+    const response = await fetch(`${API_BASE_URL}/api/contact/messages/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,12 +19,12 @@ export async function sendContactMessage(data) {
         message: data.message
       })
     });
-    
+
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(JSON.stringify(error));
+      const errorText = await response.text();
+      throw new Error(errorText);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error('Error sending contact message:', error);
