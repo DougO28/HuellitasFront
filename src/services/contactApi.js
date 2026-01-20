@@ -6,7 +6,7 @@ import API_BASE_URL from '../config';
  */
 export async function sendContactMessage(data) {
   try {
-    const response = await fetch(`${API_BASE_URL}/contact/messages/`, {
+    const response = await fetch(`${API_URL}/api/contact/messages/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
