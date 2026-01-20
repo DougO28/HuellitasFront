@@ -5,7 +5,7 @@ import API_BASE_URL from '../config';
  */
 function adaptNewsData(backendNews) {
   // Construir URL completa de la imagen
-  const baseURL = 'http://localhost:8000';
+  const baseURL = 'https://huellitasadmin.onrender.com';
   
   // CAMBIO: Verificar si la URL ya es completa
   let imagen;

@@ -5,7 +5,7 @@ import API_BASE_URL from '../config';
  */
 function adaptTestimonialData(backendStory) {
   // Construir URL completa de la imagen
-  const baseURL = 'http://localhost:8000';
+  const baseURL = 'https://huellitasadmin.onrender.com';
   let imagen;
   
   if (backendStory.after_image) {

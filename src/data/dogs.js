@@ -5,7 +5,7 @@ import API_BASE_URL from '../config';
  */
 function adaptPetData(backendPet) {
   // Construir URL completa de la imagen
-  const baseURL = 'http://localhost:8000';
+  const baseURL = 'https://huellitasadmin.onrender.com';
   const foto = backendPet.main_image 
     ? `${baseURL}${backendPet.main_image}`
     : 'https://img.freepik.com/foto-gratis/perro-pug-aislado-sobre-fondo-blanco_2829-11416.jpg?semt=ais_hybrid&w=740&q=80';
